@@ -1,0 +1,46 @@
+# Playground AI is image generation tool, It does not has a public API but we can use https://playground.com/ to generate images.
+
+Send a Post request to https://playground.com/api/models
+## Sending Header uses Cookies to authencitae.
+We can save cookies in a seperate file i.e cookies.py  and also use multiple cookies.
+headers = {
+    'accept': 'application/json, text/plain, */*',
+    'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+    'content-type': 'application/json',
+    'cookie': // get from cookies.py
+    'origin': 'https://playground.com',
+    'priority': 'u=1, i',
+    'referer': 'https://playground.com/create',
+    'sec-ch-ua': '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
+    'sec-ch-ua-mobile': '?1',
+    'sec-ch-ua-platform': '"Android"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-origin',
+    'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Mobile Safari/537.36',
+}
+
+json_data = {
+    'width': 1024,
+    'height': 1024,
+    'seed': 634661107,
+    'num_images': 1,
+    'modelType': 'Playground_v2.5',
+    'sampler': 9,
+    'cfg_scale': 3,
+    'guidance_scale': 3,
+    'strength': 1.45,
+    'steps': 30,
+    'high_noise_frac': 1,
+    'negativePrompt': 'ugly, deformed, noisy, blurry, distorted, out of focus, bad anatomy, extra limbs, poorly drawn face, poorly drawn hands, missing fingers, nudity, nude',
+    'prompt': "// GET FROM USERS MESSGAGE ",
+    'expandPrompt': True,
+    'isPrivate': True,
+    'batchId': 'zdmEIw7HBl',
+    'generateVariants': False,
+    'initImageFromPlayground': False,
+    'statusUUID': '64bc8311-78cb-488f-8f66-5081f399c018',
+    'original_prompt': 'same as prompt',
+}
+## How we send the request...
+response = requests.post('https://playground.com/api/models', cookies=cookies, headers=headers, json=json_data)
